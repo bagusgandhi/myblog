@@ -61,12 +61,14 @@ export default function Navbar(){
                             ))}
                             <li>
                                 <button
+                                    aria-label='mode'
                                     onClick={themeModeHandler}
                                     className="p-2 text-white bg-black rounded-full dark:bg-white dark:text-black"
                                 >{theme === 'light' ? <Moon /> : <Sun />}</button>
                             </li>
                             <li className='lg:hidden'>
                                 <button
+                                    aria-label='mobile-menu'
                                     className='p-2 ml-2'
                                     onClick={themeMenuHandler}
                                 >

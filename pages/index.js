@@ -66,11 +66,9 @@ export default function Home({ posts }) {
             </a>
           </Link>
         </div>
-        <ul>
-          {posts.map((post) => (
+        {posts.map((post) => (
             <PostList key={post.uuid} post={post} />
-          ))}
-        </ul>
+        ))}
       </div>
     </>
   )
