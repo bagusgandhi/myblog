@@ -11,7 +11,7 @@ export async function getStaticProps(){
   return { props: { 
     posts,
     data: {
-      meta_title: 'Gandhi Dev',
+      meta_title: 'Bagus Gandhi',
       meta_description: 'test 1, 2, 3, and 4',
       feature_image: 'https://avatars.githubusercontent.com/u/35498095?v=4',
       canonical_url: '',
@@ -47,9 +47,12 @@ export default function Home({ posts }) {
             }}
           /></h1>
           <p className='pt-3 pb-5 font-body text-xl font-light text-black dark:text-white'>Hi! I am Bagus Gandhi, Fullstack JavaSscript Developer Enthusiast!</p>
-          <button
-            className="px-4 border w-full lg:w-1/4 rounded-full py-2 text-secondary  dark:text-yellow"
-          >Say Hi!</button>
+          <Link href={'/contact'}>          
+            <a
+              aria-label='contact'
+              className="px-4 border w-full lg:w-1/4 rounded-full py-2 text-secondary  dark:text-yellow"
+            >Say Hi!</a>
+          </Link>
         </div>
       </div>
 
