@@ -44,15 +44,15 @@ export default function Navbar(){
                     <Link href="/">
                         <a className='flex items-center'>
                             {/* <span className='rounded-full p-4 bg-yellow'></span> */}
-                            <p className='font-body text-2xl font-bold dark:text-white lg:block'>Gandhi.</p>
+                            <p className='font-body text-2xl text-secondary font-bold dark:text-yellow lg:block'>Bagus Gandhi.</p>
                         </a>
                     </Link>
                     
                     {/* web menu */}
                     <div className='lg:block'>
-                        <ul className='flex items-center'>
+                        <ul className='flex items-center gap-2'>
                             {menu.map((m, i) => (
-                                <li key={i}  className='hidden lg:block group relative mr-6 mb-1'>
+                                <li key={i}  className='hidden lg:block group relative mb-1'>
                                     <Link href={m.link}>
                                         <a className='relative z-30 block px-2 font-body text-lg font-medium text-primary transition-colors group-hover:text-secondary dark:text-white dark:group-hover:text-yellow' 
                                         >{m.title}</a>
