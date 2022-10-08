@@ -34,3 +34,15 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+#sitemap
+/public/sitemap.xml
+/public/sitemap-0.xml
+/public/robots.txt
+/public/sw.js
+/public/workbox-*.js
+/public/worker-*.js
+/public/workbox-*.js.map
+/public/worker-*.js.map
+/public/img/favicon_io
+
