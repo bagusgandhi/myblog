@@ -32,7 +32,8 @@ h3 {
 
 h4 {
     line-height: 2;
-    font-size: large;
+    font-weight: bold;
+    font-size: x-large;
 }
 
 h1 {
@@ -61,6 +62,18 @@ a.tag {
     color: black;
     padding: 4px 14px;
     border-radius: 15px;
+}
+
+.light hr {
+    margin-bottom: 2rem;
+    opacity: 30%;
+    color: #00aaa1;
+}
+
+.dark hr {
+    margin-bottom: 2rem;
+    opacity: 30%;
+    color: #eee;
 }
 
 .dark #content a {

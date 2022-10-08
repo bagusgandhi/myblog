@@ -47,7 +47,7 @@ export default function Home({ posts }) {
             }}
           />
           <h1 className='pt-3 pb-5 font-body text-xl font-light text-black dark:text-white'>Hi! I am Bagus Gandhi, Fullstack JavaSscript Developer Enthusiast!</h1>
-          <Link href={'/contact'}>          
+          <Link href={'mailto:bagusgandhi4@gmail.com'}>          
             <a
               aria-label='contact'
               className="px-4 border w-full lg:w-1/4 rounded-full py-2 text-secondary  dark:text-yellow"
@@ -60,8 +60,8 @@ export default function Home({ posts }) {
       <div className='py-16'>
         <div className='flex items-center pb-6'>
           {/* icon */}
-          <News className='w-10 h-10' />
-          <h3 className='ml-3 font-body text-2xl font-semibold text-black dark:text-white'>Article</h3>
+          <News className='w-10 h- mr-2' />
+          <h3>Article</h3>
           <Link href={'/posts'}>
             <a className='flex gap-2 items-center pl-10 font-body italic text-green transition-colors hover:text-secondary dark:text-green-light dark:hover:text-secondary'>
               <small>All Post</small>
