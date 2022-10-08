@@ -28,7 +28,7 @@ export default function Home({ posts }) {
   return (
     <>
       <div className='lg:flex lg:p-8 lg:gap-8 items-center'>
-        <div className='flex justify-center '>
+        <div className='flex justify-center mb-10 lg:mb-0'>
           <Image 
             className='rounded-full basis-1/4 object-center'
             src='https://avatars.githubusercontent.com/u/35498095?v=4'

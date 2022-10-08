@@ -20,7 +20,7 @@ export default function Tag({ posts, data}){
         <div className='pb-8 sm:pb-12'>
             <PostTitle 
                 title={`${data.name} : ${ data.count.posts }`}
-                description={'Articles, tutorials, snippets, rants, and everything else.'}
+                description={data.description}
             />
             {posts.map((post) => (
                 <PostList key={post.id} post={post} />

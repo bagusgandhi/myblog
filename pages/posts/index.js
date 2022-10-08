@@ -25,7 +25,7 @@ export default function Home({ posts }) {
     <div className='pb-8 sm:pb-12'>
       <PostTitle 
         title={'All Posts'} 
-        description={'Articles, tutorials, snippets, rants, and everything else.'} 
+        description={'Articles, tutorials, snippets, and everything else.'} 
       />
       {posts.map((post) => (
         <PostList key={post.uuid} post={post} />
