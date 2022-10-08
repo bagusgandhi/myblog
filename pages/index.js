@@ -38,15 +38,15 @@ export default function Home({ posts }) {
           />
         </div>
         <div className='basis-3/4 md:mt-4'>
-          <h1><Typewriter 
+          <Typewriter 
             options={{
               strings: ['Frontend or Backend?', 'Why not both?'],
               autoStart: true,
-              wrapperClassName: 'h1 pt-3 font-body xs:text-center lg:text-3xl text-3xl font-semibold text-black dark:text-white',
+              wrapperClassName: 'pt-3 font-body xs:text-center lg:text-3xl text-3xl font-semibold text-black dark:text-white',
               loop: true
             }}
-          /></h1>
-          <p className='pt-3 pb-5 font-body text-xl font-light text-black dark:text-white'>Hi! I am Bagus Gandhi, Fullstack JavaSscript Developer Enthusiast!</p>
+          />
+          <h1 className='pt-3 pb-5 font-body text-xl font-light text-black dark:text-white'>Hi! I am Bagus Gandhi, Fullstack JavaSscript Developer Enthusiast!</h1>
           <Link href={'/contact'}>          
             <a
               aria-label='contact'
