@@ -13,9 +13,13 @@ export default function Content({ data }){
                 ))}
             </div>
             <h1 className="post-title">{data.title}</h1>
-            <div className='flex justify-center mb-8'>
+            <div className='flex justify-center mb-8 gap-4'>
                 <p>
                     {data.updated_at ? new Date(data.updated_at).toDateString() : ''}
+                </p>
+                <p> | </p>
+                <p>
+                    {data.reading_time} min read
                 </p>
             </div>
             {data.feature_image ?  
