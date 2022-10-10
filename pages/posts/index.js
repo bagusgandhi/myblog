@@ -9,14 +9,16 @@ export async function getStaticProps(){
     posts,
     data: {
       meta_title: 'All Posts',
-      meta_description: 'test 1, 2, 3, and 4',
+      meta_description: 'Articles, tutorials, snippets, and everything else.',
       feature_image: '',
       canonical_url: '',
       published_at: '',
       updated_at: ''
     },
     type: 'website'
-   } }
+   },
+   revalidate: 60
+  }
 }
 
 export default function Home({ posts }) {

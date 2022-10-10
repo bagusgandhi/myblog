@@ -12,7 +12,7 @@ export async function getStaticProps(){
     posts,
     data: {
       meta_title: 'Bagus Gandhi',
-      meta_description: 'test 1, 2, 3, and 4',
+      meta_description: 'Personal Blog by Bagus Gandhi Pratama',
       feature_image: 'https://avatars.githubusercontent.com/u/35498095?v=4',
       canonical_url: '',
       published_at: '',
@@ -20,7 +20,9 @@ export async function getStaticProps(){
 
     },
     type: 'website' 
-  }}
+    },
+    revalidate: 60
+  }
 }
 
 export default function Home({ posts }) {

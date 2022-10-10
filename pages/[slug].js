@@ -13,7 +13,11 @@ export async function getStaticPaths(){
 export async function getStaticProps({ params }){
     const { slug } = params;
     const data = await getPagesBySlug(slug);
-    return { props: { data } }
+    return { props: { 
+        data 
+    },
+    revalidate: 60
+    }
 }
 
 export default function Page({ data }){

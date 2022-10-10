@@ -31,7 +31,9 @@ export async function getStaticProps({ params }){
         slug,
         type: 'article',
         url 
-    } }
+        },
+        revalidate: 60
+    }
 }
 
 

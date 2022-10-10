@@ -12,7 +12,12 @@ export async function getStaticProps({ params }){
     const { slug } = params;
     const posts = await getAllPostByTagsSlug(slug);
     const data = await getTagbySlug(slug);
-    return { props: { posts, data } };
+    return { props: { 
+        posts, 
+        data 
+    },
+    revalidate: 60
+};
 }
 
 export default function Tag({ posts, data}){
