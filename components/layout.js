@@ -37,9 +37,7 @@ export default function Layout({ children }){
                     />
                     <meta name="twitter:card" content='summary_large_image' />
                     <meta name="twitter:title" content={children.props.data?.meta_title} />
-                    <meta
-                    name="twitter:description"
-                    content={children.props.data?.meta_description} 
+                    <meta name="twitter:description" content={children.props.data?.meta_description} 
                     />
                     <meta name="twitter:image" content={children.props.data?.feature_image} />
                     <meta name="twitter:label1" content='Written by'/>
