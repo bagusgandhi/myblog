@@ -48,7 +48,7 @@ export default function Home({ posts }) {
               loop: true
             }}
           />
-          <h1 className='pt-3 pb-5 font-body text-xl font-light text-black dark:text-white'>Hi! I am Bagus Gandhi, Fullstack JavaSscript Developer Enthusiast!</h1>
+          <h1 className='pt-3 pb-5 font-body text-xl font-light text-black dark:text-white'>Hi there! I'm Bagus Gandhi, a skilled Fullstack Developer.</h1>
           <Link href={'mailto:bagusgandhi4@gmail.com'}>          
             <a
               aria-label='contact'
