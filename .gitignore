@@ -36,10 +36,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-#sitemap
-/public/sitemap.xml
-/public/sitemap-0.xml
-/public/robots.txt
+#sitemap - generated at build time, keep in git for deployment
 /public/sw.js
 /public/workbox-*.js
 /public/worker-*.js
