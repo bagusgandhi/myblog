@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://bagusgandhi.web.id
+
+# Sitemaps
+Sitemap: https://bagusgandhi.web.id/sitemap.xml
