@@ -1,34 +1,77 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# bagusgandhi.web.id
+
+Personal blog & portfolio built with Next.js 14, MDX, and Tailwind CSS. Deployed on Vercel.
+
+## Features
+
+- 📝 Markdown/MDX-based blog posts
+- 🎨 Modern UI with dark/light mode
+- 🔍 SEO optimized with meta tags, sitemap, and structured data
+- ⚡ Static site generation for fast performance
+- 🏷️ Tag-based post categorization
+- 📱 Fully responsive design
+- 🎯 Code syntax highlighting with Prism
+
+## Tech Stack
+
+- **Framework**: Next.js 14 (Pages Router)
+- **Styling**: Tailwind CSS + Typography plugin
+- **Content**: MDX with gray-matter frontmatter
+- **Deployment**: Vercel
+- **Icons**: React Icons
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+# Install dependencies
+npm install
+
+# Run development server
 npm run dev
-# or
-yarn dev
+
+# Build for production
+npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Writing Posts
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+Create a new `.mdx` file in `content/posts/`:
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+```markdown
+---
+title: "Your Post Title"
+date: "2024-01-01"
+excerpt: "A brief description"
+tags: ["tag1", "tag2"]
+coverImage: "/img/optional-cover.jpg"
+---
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+Your content here...
+```
 
-## Learn More
+## Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```
+├── content/
+│   └── posts/          # Markdown blog posts
+├── components/         # React components
+├── lib/
+│   └── mdx.js         # Markdown utilities
+├── pages/
+│   ├── about.js       # About/CV page
+│   ├── posts/         # Blog listing and detail
+│   └── tags/          # Tag-based filtering
+├── public/            # Static assets
+└── styles/            # Global styles
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Environment Variables
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+```env
+NEXT_PUBLIC_SITE_URL=https://bagusgandhi.web.id
+SITE_URL=https://bagusgandhi.web.id
+```
 
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Push to GitHub and connect the repository to [Vercel](https://vercel.com). No additional configuration needed.

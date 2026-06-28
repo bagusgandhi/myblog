@@ -2,87 +2,69 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-    font-family: 'Poppins', sans-serif;
+@layer base {
+  body {
+    @apply bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 transition-colors duration-300;
+  }
 }
 
-p {
-    line-height: 1.8;
-    font-weight: lighter;
-    margin: 1.4rem 0px;
+@layer components {
+  .prose pre {
+    @apply bg-gray-900 dark:bg-gray-800 rounded-lg overflow-x-auto;
+  }
+
+  .prose code {
+    @apply text-accent-dark dark:text-accent-light font-mono text-sm;
+  }
+
+  .prose pre code {
+    @apply text-gray-100;
+  }
+
+  .prose img {
+    @apply rounded-lg;
+  }
+
+  .prose a {
+    @apply text-accent dark:text-yellow-light no-underline hover:underline;
+  }
+
+  .rehype-code-title {
+    @apply px-4 py-2 text-sm font-mono text-gray-200 bg-gray-800 rounded-t-lg border-b border-gray-700;
+  }
+
+  .rehype-code-title + pre {
+    @apply mt-0 rounded-t-none;
+  }
 }
 
-h2 {
-    line-height: 2;
-    font-weight: bold;
-    font-size: x-large;
+/* Code highlighting line numbers */
+.code-highlight {
+  float: left;
+  min-width: 100%;
 }
 
-h2.subheading {
-    line-height: 2;
-    font-weight: lighter;
+.code-line {
+  display: block;
+  padding-left: 16px;
+  padding-right: 16px;
+  margin-left: -16px;
+  margin-right: -16px;
 }
 
-h3 {
-    line-height: 2;
-    font-weight: bold;
-    font-size: large;
-    font-size: x-large;
+.highlight-line {
+  margin-left: -16px;
+  margin-right: -16px;
+  padding-left: 12px;
+  border-left: 4px solid rgb(59, 130, 246);
+  background-color: rgba(55, 65, 81, 0.5);
 }
 
-h4 {
-    line-height: 2;
-    font-weight: bold;
-    font-size: x-large;
+.line-number::before {
+  display: inline-block;
+  width: 1rem;
+  text-align: right;
+  margin-right: 16px;
+  color: rgb(156, 163, 175);
+  content: attr(line);
 }
-
-h1 {
-    line-height: 2;
-    font-weight: bold;
-    font-size: xx-large;
-}
-
-h1.post-title {
-    text-align: center;
-}
-
-a {
-    font-weight: 500;
-    color: rgb(93, 123, 255);
-}
-
-#content p a:hover {
-    border-bottom: 2px solid ;
-}
-
-a.tag {
-    display: inline-block;
-    margin-right: 4;
-    font-weight: 500;
-    color: black;
-    padding: 4px 14px;
-    border-radius: 15px;
-}
-
-.light hr {
-    margin-bottom: 2rem;
-    opacity: 30%;
-    color: #00aaa1;
-}
-
-.dark hr {
-    margin-bottom: 2rem;
-    opacity: 30%;
-    color: #eee;
-}
-
-.dark #content a {
-    color: #f4d06f;
-}
-
-.light #content a {
-    color: #00aaa1;
-}
-
-
-/* pt-3 pb-5 font-body text-xl font-light text-black dark:text-white */

@@ -1,0 +1,101 @@
+---
+title: "Cara install NodeJS Serta Memahami Bagaimana Cara Kerjanya"
+date: "2022-10-10"
+excerpt: "Sudah tidak asing ya kalo mendengar JavaScript di lingkup pengembangan website. Artikel ini membahas cara install NodeJS dan memahami arsitektur di baliknya."
+tags: ["nodejs", "tutorial"]
+coverImage: ""
+---
+
+Sudah tidak asing ya kalo mendengar JavaScript di lingkup pengembangan website. JavaScript adalah bahasa pemrograman yang digunakan untuk membuat website khususnya di sisi client atau bahasa pemrograman yang berjalan di browser agar tampilan website menjadi lebih interaktif.
+
+JavaScript hanya bisa dipahami oleh browser saja, namun saat ini dengan munculnya sebuah anomali yang menggemparkan dunia yaitu **NodeJS** — bahasa pemrograman javascript ini bisa berjalan atau dipahami di sisi server.
+
+Kalau kamu pernah mendengar bahasa PHP, Java, C# ini adalah bahasa yang berjalan disisi server, namun setelah ditemukannya NodeJS oleh Ryan Dahl pada tahun 2009, javascript bisa berjalan di sisi server menggunakan NodeJS. Jadi NodeJS ini adalah runtime environment agar javascript bisa berjalan di sisi server.
+
+## Arsitektur & Proses Pada NodeJS
+
+Sebelum lanjut ke praktik, alangkah baiknya jika kita mengerti dahulu bagaimana NodeJS ini dapat bekerja di server. NodeJS bergantung pada **V8 Engine** yaitu sebuah mesin yang dikembangkan oleh Google agar dapat memahami bahasa javascript di server.
+
+Sedangkan untuk asynchronous I/O bergantung pada library yang bernama **libuv**. Asynchronous I/O ini maksudnya agar NodeJS memiliki akses ke masukan dan keluaran ke sistem server seperti membaca dan membuat file, networking, dan banyak lagi.
+
+Proses yang berjalan didalam NodeJS ini adalah **single thread** yang artinya jika ada banyak pemrosesan maka hanya ada 1 thread saja yang melakukannya dengan cara asinkron yang dilakukan di dalam event-loop.
+
+Jika pemrosesan yang dilakukan hanyalah ringan ini tidak menjadi masalah, namun jika prosesnya berat akan memblokir event-loop. Maka untuk pemrosesan yang berat otomatis akan dilakukan dengan membuat thread baru, atau biasa disebut **Thread Pool**. Defaultnya terdapat 4 Thread Pool, namun bisa dikustomisasi sampai 128 thread.
+
+## Cara Install NodeJS & Package Manager di Windows
+
+### 1. Download NodeJS
+
+Langkah pertama, kita perlu install dahulu NodeJS di PC/laptop kita.
+
+Akses [https://nodejs.org/en/download/](https://nodejs.org/en/download/) dan pilih versi LTS, download sesuai OS yang digunakan.
+
+Untuk pengguna linux, cara install NodeJS bisa dengan mengetikan command berikut di terminal:
+
+```bash
+sudo apt install nodejs -y
+```
+
+### 2. Install NodeJS dan NPM
+
+Setelah download installernya, klik 2x file tersebut untuk menjalankan instalasi NodeJS dan NPM.
+
+1. Klik Next untuk memulai instalasi
+2. Pilih destinasi tempat dimana nodejs mau diletakan (default: `C:\Program Files\nodejs`), klik Next
+3. Pada custom setup terdapat npm package manager yang akan terinstall juga, klik Next
+4. Klik Install untuk melakukan proses instalasinya
+
+### 3. Cek NodeJS dan NPM versi
+
+Buka terminal, lalu ketikan perintah berikut:
+
+```bash
+node -v
+# output: v16.13.1
+
+npm -v
+# output: 8.1.2
+```
+
+## Cara Install NodeJS & Package Manager Menggunakan NVM
+
+Ini hanya cara opsional lain. NVM adalah **Node Version Manager** yang dapat memudahkan untuk upgrade atau downgrade versi NodeJS. Para NodeJS developer suka ini, karena sangat memudahkan jika ingin mengganti versi NodeJS menyesuaikan project yang sedang dikerjakan.
+
+### 1. Download NVM
+
+Download NVM dari repository resminya sesuai OS yang digunakan.
+
+### 2. Install NVM
+
+1. Klik file installer 2x, atau klik kanan > open as administrator
+2. Klik "I Accept the Agreement", lalu klik Next
+3. Pada destination file secara default akan ada di `C:\Users\pcuser\AppData\Roaming\nvm`, klik Next
+4. Pada folder untuk symlink `C:\Program Files\nodejs`, klik Next
+5. Klik Install, Finish
+
+### 3. Cara Menggunakan NVM
+
+Buka PowerShell sebagai Admin, lalu gunakan perintah-perintah berikut:
+
+```bash
+# Install NodeJS versi LTS (latest)
+nvm install lts
+
+# Melihat list versi NodeJS yang tersedia
+nvm list available
+
+# Install versi spesifik
+nvm install 14.20.0
+
+# Melihat versi yang sudah terinstall
+nvm list
+
+# Menggunakan versi tertentu
+nvm use 16.17.1
+```
+
+## Kesimpulan
+
+Kita sudah belajar banyak dari pengertian NodeJS, bagaimana cara kerja NodeJS hingga cara instalasinya. Dengan NodeJS kita dapat mengandalkan dia untuk mengurusi backend pada website, seperti membuat web service.
+
+Jika anda familiar dengan JavaScript dan sedang membutuhkan backend, maka NodeJS adalah pilihan yang tepat karena menggunakan bahasa javascript — dibanding harus mempelajari bahasa pemrograman lain untuk membuat backendnya.
