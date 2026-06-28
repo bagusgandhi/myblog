@@ -1,80 +1,108 @@
-import Link from 'next/link'
-import Image from 'next/image'
-import Typewriter from 'typewriter-effect';
-import { getNewestArticle } from '../lib/ghost'
-import News from '../components/ui/icons/news';
-import ArrowRight from '../components/ui/icons/arrow-right';
-import PostList from '../components/ui/postlist';
+import Image from 'next/image';
+import Link from 'next/link';
+import { FiArrowRight, FiGithub, FiLinkedin } from 'react-icons/fi';
+import { getAllPosts } from '../lib/mdx';
+import PostCard from '../components/post-card';
 
-export async function getStaticProps(){
-  const posts = await getNewestArticle();
-  return { props: { 
-    posts,
-    data: {
-      meta_title: 'Bagus Gandhi',
-      meta_description: 'Personal Blog by Bagus Gandhi Pratama',
-      feature_image: 'https://avatars.githubusercontent.com/u/35498095?v=4',
-      canonical_url: '',
-      published_at: '',
-      updated_at: ''
+export async function getStaticProps() {
+  const posts = getAllPosts().slice(0, 5);
 
+  return {
+    props: {
+      posts,
+      meta: {
+        title: null,
+        description: 'Personal Blog & Portfolio by Bagus Gandhi Pratama - Full Stack Engineer',
+        type: 'website',
+      },
     },
-    type: 'website' 
-    },
-    revalidate: 60
-  }
+  };
 }
 
 export default function Home({ posts }) {
-
   return (
     <>
-      <div className='lg:flex lg:p-8 lg:gap-8 items-center'>
-        <div className='flex justify-center mb-10 lg:mb-0'>
-          <Image 
-            className='rounded-full basis-1/4 object-center'
-            src='https://avatars.githubusercontent.com/u/35498095?v=4'
-            alt='Bagus Gandhi Pratama'
-            width={250}
-            height={250}
-          />
+      {/* Hero Section */}
+      <section className="py-12 sm:py-16">
+        <div className="flex flex-col-reverse sm:flex-row items-center gap-8">
+          <div className="flex-1 text-center sm:text-left">
+            <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white leading-tight">
+              Hi, I&apos;m{' '}
+              <span className="text-accent dark:text-yellow">
+                Bagus Gandhi
+              </span>
+            </h1>
+            <p className="mt-4 text-lg text-gray-600 dark:text-gray-400 max-w-lg">
+              Full Stack Engineer yang suka membangun produk digital. Menulis tentang web development, cloud, dan teknologi.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3 justify-center sm:justify-start">
+              <Link
+                href="/about"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-accent text-white font-medium hover:bg-accent-dark transition-colors no-underline"
+              >
+                About Me
+                <FiArrowRight size={16} />
+              </Link>
+              <a
+                href="https://github.com/bagusgandhi"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 font-medium hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors no-underline"
+              >
+                <FiGithub size={16} />
+                GitHub
+              </a>
+              <a
+                href="https://linkedin.com/in/bagus-gandhi-pratama"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 font-medium hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors no-underline"
+              >
+                <FiLinkedin size={16} />
+                LinkedIn
+              </a>
+            </div>
+          </div>
+          <div className="flex-shrink-0">
+            <Image
+              className="rounded-full"
+              src="/img/bagus-gandhi-pratama.png"
+              alt="Bagus Gandhi Pratama"
+              width={180}
+              height={180}
+              priority
+            />
+          </div>
         </div>
-        <div className='basis-3/4 md:mt-4'>
-          <Typewriter 
-            options={{
-              strings: ['Frontend or Backend?', 'Why not both?'],
-              autoStart: true,
-              wrapperClassName: 'pt-3 font-body xs:text-center lg:text-3xl text-3xl font-semibold text-black dark:text-white',
-              loop: true
-            }}
-          />
-          <h1 className='pt-3 pb-5 font-body text-xl font-light text-black dark:text-white'>Hi there! I'm Bagus Gandhi, a skilled Fullstack Developer.</h1>
-          <Link href={'mailto:bagusgandhi4@gmail.com'}>          
-            <a
-              aria-label='contact'
-              className="px-4 border w-full lg:w-1/4 rounded-full py-2 text-secondary  dark:text-yellow"
-            >Say Hi!</a>
-          </Link>
-        </div>
-      </div>
+      </section>
 
-      {/* postingan */}
-      <div className='py-16'>
-        <div className='flex items-center pb-6'>
-          {/* icon */}
-          <News className='w-10 h- mr-2' />
-          <h3>Article</h3>
-          <Link href={'/posts'}>
-            <a className='flex gap-2 items-center pl-10 font-body italic text-green transition-colors hover:text-secondary dark:text-green-light dark:hover:text-secondary'>
-              <small>All Post</small>
-              <i><ArrowRight /></i>
-            </a>
+      {/* Recent Posts */}
+      <section className="py-8">
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
+            Recent Posts
+          </h2>
+          <Link
+            href="/posts"
+            className="inline-flex items-center gap-1 text-sm font-medium text-accent dark:text-accent-light hover:text-accent-dark dark:hover:text-accent no-underline"
+          >
+            View all
+            <FiArrowRight size={14} />
           </Link>
         </div>
-        {posts.map((post) => (
-            <PostList key={post.uuid} post={post} />
-        ))}
-      </div>
+
+        {posts.length > 0 ? (
+          <div className="divide-y divide-gray-200 dark:divide-gray-800">
+            {posts.map((post) => (
+              <PostCard key={post.slug} post={post} />
+            ))}
+          </div>
+        ) : (
+          <p className="text-gray-500 dark:text-gray-400 py-8 text-center">
+            Belum ada post. Segera hadir!
+          </p>
+        )}
+      </section>
     </>
-  )
+  );
 }

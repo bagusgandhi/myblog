@@ -1,0 +1,41 @@
+---
+title: "Robust System ≠ Complex System"
+date: "2025-06-25"
+excerpt: "Di dunia nyata, data tidak selalu datang dalam kondisi ideal. Sistem yang bagus bukan yang paling canggih, tapi yang mudah dipakai dan benar-benar membantu operasional."
+tags: ["engineering", "digitalization", "problem-solving"]
+coverImage: "/img/posts/aplikasi-mission-critical-bukan-nice-to-have.jpg"
+---
+
+Makin ke sini, saya belajar satu hal penting:
+
+> **Robust system ≠ complex system.**
+
+Di dunia nyata, terutama di lapangan, data tidak selalu datang dalam kondisi ideal. User juga butuhnya cepat dan simpel. Tapi di sisi lain, sistem tetap dituntut akurat dan bisa diandalkan.
+
+## Contoh Nyata: Pencatatan Hour Meter (HM)
+
+![HM Capture Flow Process](/img/posts/hm-capture-flow-process.jpg)
+
+Salah satu contoh nyatanya ada di proses pencatatan Hour Meter (HM) yang beberapa pekan lalu saya kerjakan.
+
+**Sebelumnya:** HM sering dicatat manual lalu baru di-input ulang di office. Prosesnya panjang, rawan beda versi, dan sulit divalidasi.
+
+**Pendekatannya kemudian diubah menjadi lebih sederhana:**
+
+Tim di lapangan mencatat HM langsung lewat mobile app, dilengkapi foto sebagai evidence, lalu datanya otomatis dikaitkan ke transaksi dari device Auto Fuel Terminal (AFT) berdasarkan alur waktu.
+
+Sedang saya coba tambahkan **Optical Character Recognition (OCR)** biar makin otomatis — tapi saya mau lihat utilisasinya dulu dari user di lapangan, apakah terbantu atau justru bikin ribet 😄
+
+![Analisis Fuel](/img/posts/aplikasi-mission-critical-bukan-nice-to-have.jpg)
+
+## Prinsip yang Saya Pegang
+
+Pada aplikasinya nggak ada fitur yang dibuat rumit. Fokusnya justru ke:
+
+- **Alur proses yang jelas** — user tahu harus ngapain tanpa mikir lama
+- **Asumsi yang disepakati sejak awal** — biar nggak ada grey area di logic
+- **Toleransi terhadap kondisi lapangan** yang tidak selalu sempurna
+
+## Kesimpulan
+
+Dari situ saya belajar, sistem yang bagus bukan yang paling canggih, tapi yang **mudah dipakai dan benar-benar membantu operasional sehari-hari**.

@@ -1,38 +1,58 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  safelist: ["dark"],
   darkMode: 'class',
   content: [
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    colors: {
-      transparent: "transparent",
-      primary: "#072344",
-      secondary: "#00aaa1",
-      "green-light": "#cceeec",
-      green: "#007c85",
-      "green-dark": "#065a68",
-      "blue-light": "#b3d6f1",
-      blue: "#0074d1",
-      "blue-dark": "#072344",
-      black: "#000000",
-      white: "#ffffff",
-      "yellow-lighter": "#f6e8c6",
-      "yellow-light": "#f8edd0",
-      yellow: "#f4d06f",
-      "yellow-dark": "#daa512",
-      "grey-lightest": "#eff0f3",
-      "grey-lighter": "#eceef1",
-      "grey-light": "#ccd7e0",
-      grey: "#adb6c4",
+    extend: {
+      colors: {
+        primary: '#1a1a2e',
+        accent: {
+          DEFAULT: '#00aaa1',
+          light: '#cceeec',
+          dark: '#007c85',
+        },
+        yellow: {
+          DEFAULT: '#f4d06f',
+          light: '#f8edd0',
+          dark: '#daa512',
+        },
+      },
+      fontFamily: {
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+        mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
+      },
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            color: theme('colors.gray.700'),
+            a: {
+              color: '#00aaa1',
+              '&:hover': {
+                color: '#007c85',
+              },
+            },
+            'code::before': { content: '""' },
+            'code::after': { content: '""' },
+          },
+        },
+        invert: {
+          css: {
+            color: theme('colors.gray.300'),
+            a: {
+              color: '#cceeec',
+              '&:hover': {
+                color: '#00aaa1',
+              },
+            },
+          },
+        },
+      }),
     },
-    container: {
-      center: true,
-      padding: "1rem",
-    },
-    extend: {},
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
 }

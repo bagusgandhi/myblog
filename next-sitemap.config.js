@@ -1,5 +1,6 @@
+/** @type {import('next-sitemap').IConfig} */
 module.exports = {
-    siteUrl: process.env.APP_URL,
-    generateRobotsTxt: true, // (optional)
-    // REST CODE READ DOCS  ...
-    }
+  siteUrl: process.env.SITE_URL || 'https://bagusgandhi.web.id',
+  generateRobotsTxt: true,
+  sitemapSize: 7000,
+};

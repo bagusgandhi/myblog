@@ -1,0 +1,115 @@
+---
+title: "Redis Pub/Sub, Saya baru tau kalau Redis bisa untuk Pub/Sub"
+date: "2022-12-02"
+excerpt: "Jadi akhir akhir ini saya sedang mengerjakan sebuah proyek menggunakan redis. Namun ada hal yang masih asing bagi saya, yaitu Redis Pub/Sub."
+tags: ["redis", "tutorial", "nodejs"]
+coverImage: ""
+---
+
+Jadi akhir akhir ini saya sedang mengerjakan sebuah proyek menggunakan redis. Namun ada hal yang masih asing bagi saya, yaitu Redis Pub/Sub. Jika Anda belum terlalu familiar atau baru mendengar yang namanya redis, akan saya jelaskan pengertiannya dulu ya mengenai apa sih redis itu?
+
+**Redis** adalah penyimpanan data (bisa disebut juga sebagai database) yang tersimpan di memory (RAM). Redis sudah umum digunakan sebagai caching — dibanding harus mengambil data setiap kali ada request, maka bisa disimpan saja request tersebut ke dalam redis dan ambil ke redis saja setiap ada request. Karena redis menyimpan data di memory maka tentunya akan lebih cepat untuk menyimpan dan ambil data.
+
+Namun Redis bisa juga digunakan sebagai **Pub/Sub platform**. Pub/Sub adalah teknologi realtime messaging yang sering dipakai arsitektur microservice dalam mengirim data ke beberapa service lain. Seperti platform messaging lain, Redis Publisher dapat mengirimkan pesan kemanapun subscriber yang ada pada channelnya. Channel ini mungkin bisa diibaratkan topic.
+
+Message yang terkirim pada Redis Pub/Sub bersifat **fire-and-forget** yang artinya jika message sudah di publish dan tidak tersedia si Subscriber maka pesan akan hilang tak ter-recovery.
+
+## Redis Pub/Sub menggunakan NodeJS
+
+Mari kita langsung hands on saja ya untuk mencoba Redis Pub/Sub menggunakan NodeJS. Pertama pastikan redis sudah berjalan ya, saya menjalankan redis di docker local.
+
+### 1. Setup Redis
+
+Untuk setup redis di docker bisa jalankan command berikut, pastikan docker sudah running ya.
+
+```bash
+docker run -d -p 6379:6379 --name redis -i redis
+```
+
+### 2. Setup NodeJS Project
+
+Setup Node JS project, buatlah folder. Masuk ke dalam folder tersebut lalu buka terminal jalankan perintah:
+
+```bash
+npm init -y
+```
+
+Install redis package dengan perintah berikut:
+
+```bash
+npm i ioredis
+```
+
+Buat file `pub.js` dan `sub.js`
+
+### 3. Script pada pub.js
+
+Oke lalu pada `pub.js` isikan dengan script berikut:
+
+```javascript
+const Redis = require('ioredis');
+
+const redisClient = new Redis({
+    host: '127.0.0.1',
+    port: '6379'
+})
+
+const publisher = () => {
+    const data = {
+        status: 'ok',
+        message: "ini adalah message"
+    }
+
+    setInterval(() => {
+        redisClient.publish('test', JSON.stringify(data));
+        console.log('publish');
+    }, 1000);
+}
+
+publisher();
+```
+
+Pada script diatas pertama config host dan port redis ke dalam variabel `redisClient`.
+
+Lalu melakukan publish pada `redisClient.publish('nama channel', 'message')`. Data yang bisa dikirimkan sebagai message berbentuk string, jadi pastikan convert message sebagai string ya.
+
+### 4. Script pada sub.js
+
+Selanjutnya pada `sub.js` isikan dengan script berikut:
+
+```javascript
+const Redis = require('ioredis');
+
+const redisClient = new Redis({
+    host: '127.0.0.1',
+    port: '6379'
+})
+
+redisClient.subscribe('test')
+
+redisClient.on("message", (channel, message) => {
+    console.log(channel, message)
+});
+```
+
+Pada script diatas pertama config host dan port redis ke dalam variabel `redisClient`.
+
+Lalu melakukan subscribe pada `redisClient.subscribe('test')` lalu listen `redis.on()` jika ada message, logging channel dan messagenya.
+
+### 5. Running App
+
+Terakhir jalankan perintah berikut:
+
+```bash
+# Menjalankan pub.js
+npm run pub
+
+# Menjalankan sub.js
+npm run sub
+```
+
+## Kesimpulan
+
+Redis Pub/Sub berjalan secara **Asynchronous**, jadi ketika redis client sedang menjalankan aktivitas Publish dan Subscribe kita tidak bisa melakukan set dan get data di redis.
+
+Jika ingin melakukan set dan get data, solusinya yaitu membuat redis client baru dengan mendefinisikan redis client dengan variabel baru khusus untuk melakukan perintah set dan get data di Redis.

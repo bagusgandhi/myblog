@@ -1,0 +1,115 @@
+---
+title: "Bekas PC Bisa Jadi Server? Bisa Banget! Temukan Caranya dengan Autossh & SSH Reverse Tunnel"
+date: "2023-11-17"
+excerpt: "Apakah Anda memiliki PC atau Raspberry Pi bekas yang masih berfungsi? Tutorial ini membimbing Anda mengubah perangkat tersebut menjadi server menggunakan Autossh dan SSH Reverse Tunnel."
+tags: ["reverse-ssh", "autossh", "tutorial"]
+coverImage: ""
+---
+
+Apakah Anda memiliki PC atau Raspberry Pi bekas yang masih berfungsi dengan baik tetapi jarang digunakan? Tutorial ini akan membimbing Anda dalam mengubah perangkat tersebut menjadi server. Meskipun, sebelumnya, ada beberapa persyaratan yang perlu diperhatikan.
+
+**Persiapan:**
+- Perangkat lokal yang akan dijadikan server (PC atau Raspberry Pi) yang dapat diakses secara remote melalui SSH. Pada contoh ini, saya menggunakan PC dengan sistem operasi Linux Ubuntu.
+- Pastikan perangkat tersebut terhubung ke internet.
+- Pastikan Anda memiliki VPS (Virtual Private Server).
+
+## Flow SSH Reverse Tunnel
+
+Berdasarkan flow, untuk melakukan remote pada perangkat PC atau Raspberry Pi, kita akan menggunakan VPS (dapat disebut sebagai **Bastion Host**) sebagai perantara.
+
+Selanjutnya, dari Bastion Host, akan dilakukan otomatisasi reverse SSH tunnel ke perangkat lokal PC atau Raspberry Pi yang ingin kita remote.
+
+Selain itu, kita juga memiliki opsi untuk melakukan **port forwarding**. Misalnya, jika kita memiliki aplikasi web yang berjalan di port 80 pada perangkat PC atau Raspberry Pi tersebut dan ingin mengaksesnya secara publik, kita dapat meneruskan port tersebut melalui Bastion Host.
+
+Mari kita langsung saja ke praktiknya...
+
+## Melakukan Remote pada PC/Raspberry Pi Lokal Menggunakan Autossh dan Reverse Tunnel
+
+### Install SSH Server dan Autossh
+
+Langkah awal yang perlu dilakukan adalah memasang openssh-server:
+
+```bash
+sudo apt install openssh-server
+```
+
+Selain itu, juga pasang Autossh:
+
+```bash
+sudo apt install autossh
+```
+
+### Generate SSH Key
+
+Selanjutnya buatlah ssh key dari device PC atau raspi agar bisa melakukan SSH dengan passwordless ke server VPS (Bastion Host):
+
+```bash
+ssh-keygen -t rsa -b 2048 -f /home/user/.ssh/customname_rsa
+```
+
+> `customname_rsa` ini bisa disesuaikan dengan nama ssh-key yang mau dibuat
+
+Copy ssh pub ke server VPS dengan perintah `ssh-copy-id`:
+
+```bash
+ssh-copy-id -i /home/user/.ssh/customname_rsa user@ip_server
+```
+
+### Buat Autossh Tunnel Service
+
+Masih di local PC atau Raspi, buatlah file didalam `/etc/systemd/system/`:
+
+```bash
+sudo nano /etc/systemd/system/autossh-tunnel.service
+```
+
+Masukan konten berikut:
+
+```ini
+[Unit]
+Description=AutoSSH Tunnel service for SSH access to this computer
+After=network.target
+
+[Service]
+Environment="AUTOSSH_GATETIME=0"
+ExecStart=/usr/bin/autossh -M 0 -o "StrictHostKeyChecking=no" -o "ExitOnForwardFailure=yes" -o "ServerAliveInterval 30" -o "ServerAliveCountMax 3" -N -R 0.0.0.0:8080:0.0.0.0:80 -R 0.0.0.0:2024:0.0.0.0:22 user@ip_server -i /home/user/.ssh/customname_rsa
+
+[Install]
+WantedBy=multi-user.target
+```
+
+**Keterangan:**
+- `0.0.0.0:2024:0.0.0.0:22` — port 22 pada PC/raspi akan di forward ke port 2024 pada VPS. Jadi untuk akses SSH ke PC bisa diakses melalui VPS dengan port 2024.
+- `0.0.0.0:8080:0.0.0.0:80` — port 80 pada PC/raspi akan di forward ke port 8080 pada VPS. Jika ada web pada port 80 di PC/Raspi, bisa diakses melalui VPS pada port 8080.
+- `user@ip_server` — user dan host IP VPS anda.
+
+### Reload Daemon dan Start!
+
+Terakhir jalankan perintah berikut untuk reload daemon dan start autossh tunnel:
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl start autossh-tunnel.service
+sudo systemctl enable autossh-tunnel.service
+sudo systemctl status autossh-tunnel.service
+```
+
+### Yeay, All Set! Let's Try
+
+Coba akses PC yang akan diremote melalui VPS:
+
+```bash
+ssh -p 2024 user_pc@ip_server
+```
+
+> `user_pc`: ingat user-nya adalah user PC anda ya, bukan user VPS
+
+Atau jika ingin melihat web yang ada di PC pada port 80, bisa akses dengan `ip_server:8080`
+
+## Kesimpulan
+
+Kita dapat menyimpulkan bahwa memanfaatkan bekas PC sebagai server dengan Autossh dan SSH Reverse Tunnel adalah pilihan yang efisien. Dengan memahami flow dan mengikuti langkah-langkah instalasi serta konfigurasi yang dijelaskan, kita dapat dengan mudah mengoptimalkan perangkat yang tidak terpakai menjadi sumber daya yang berharga.
+
+Langkah-langkah tersebut memberikan akses yang aman dan andal ke perangkat dari jarak jauh, membuka peluang untuk berbagai penggunaan, seperti hosting situs web, penyimpanan file, atau bahkan menjalankan aplikasi tertentu.
+
+Demikianlah tutorial yang bisa saya informasikan, semoga artikel ini bisa bermanfaat untuk anda.
